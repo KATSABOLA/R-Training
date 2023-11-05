@@ -1,0 +1,302 @@
+---
+title: "Session 1"
+format: revealjs
+editor: visual
+---
+
+## Overview
+
+-   What is R?
+-   Why use R?
+-   Installing R and RStudio
+-   R Basics
+-   Packages in R
+-   Getting Help
+
+## What is R?
+
+-   R is a programming language and environment for statistical computing and graphics.
+-   Created by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand.
+-   Similar to the S language.
+-   Highly extensible and has a large community.
+
+## Why Use R?
+
+-   **Open Source:** Free to use and share.
+-   **Comprehensive:** Wide variety of statistical and graphical techniques.
+-   **Community:** Large community of users and contributors.
+-   **Extensible:** Easy to create and use packages for additional functionality.
+-   **Reproducible Research:** R Markdown allows for integration of code, text, and output.
+
+## Installing R and RStudio
+
+### R
+
+-   Download and install R from CRAN (Comprehensive R Archive Network): <https://cran.r-project.org/>
+
+### RStudio
+
+-   Download and install RStudio: <https://www.rstudio.com/products/rstudio/download/>
+-   Provides an Integrated Development Environment (IDE) for R.
+
+## R Interface
+
+![](images/rstudio_interface.png){fig-align="center"}
+
+## R Basics
+
+### Console
+
+-   R commands can be typed directly into the console.
+-   Output is shown below the command.
+
+### Scripts
+
+-   Save R commands in a script file (`.R` extension).
+-   Source the script to run commands.
+
+# Session 2
+
+## Overview
+
+-   Variables
+-   Basic Operations
+-   Data Types
+-   Data Structures
+-   Control Flow
+-   Functions
+
+## Variables
+
+### Introduction to Variables
+
+Variables in R are used to store data values.
+
+-   No need to declare a variable before assigning a value.
+-   Variable name must start with a letter or a dot, but if it starts with a dot, it cannot be followed by a number.
+
+------------------------------------------------------------------------
+
+## Data Types
+
+-   Numeric: **`x <- 10`**
+
+-   Character: **`name <- "John"`**
+
+-   Logical: **`flag <- TRUE`**
+
+-   Integer: **`count <- 5L`**
+
+-   Complex: **`comp <- 3+5i`**
+
+## Creating Variables
+
+```{r echo=TRUE, eval=T}
+x <- 10
+message <- "Hello, R!"
+flag <- TRUE
+num_var <- 5.67     # Numeric
+int_var <- as.integer(5)  # Integer
+char_var <- "R Programming"
+log_var <- FALSE
+
+print(x)  # Print value of variable
+```
+
+## Checking Variable Types
+
+You can check the type of a variable using the `class()` function.
+
+### Example: Checking Types
+
+```{r echo=TRUE, eval=T}
+class(num_var)  # "numeric"
+class(int_var)  # "integer"
+class(char_var)  # "character"
+class(log_var)  # "logical"
+```
+
+## Converting Variable Types
+
+You can convert between different types using functions like `as.numeric()`, `as.integer()`, `as.character()`, and `as.logical()`.
+
+### Example: Type Conversion
+
+```{r  echo=TRUE, eval=T}
+num_to_char <- as.character(num_var)
+int_to_numeric <- as.numeric(int_var)
+char_to_numeric <- as.numeric("123.45")
+log_to_char <- as.character(log_var)
+```
+
+## Basic Operations
+
+### Arithmetic
+
+```{r echo=TRUE, eval=T}
+x <- 10 + 5  # Addition
+y <- 20 - 3  # Subtraction
+z <- 5 * 3   # Multiplication
+w <- 10 / 2  # Division
+```
+
+### Logical Operations
+
+```{r echo=TRUE, eval=FALSE}
+10 > 5   # TRUE 
+5 == 5    # TRUE 
+TRUE && FALSE  # FALSE 
+TRUE || FALSE  # TRUE
+```
+
+## Data Structures
+
+### Vector
+
+```{r echo=TRUE, eval=TRUE}
+numbers <- c(1, 2, 3, 4, 5)
+```
+
+### List
+
+```{r echo=TRUE, eval=TRUE}
+my_list <- list(name = "John", age = 25, scores = numbers)
+```
+
+### Matrix
+
+```{r echo=TRUE, eval=TRUE}
+matrix(1:9, nrow = 3)
+```
+
+## Data Frame
+
+```{r echo=TRUE, eval=TRUE}
+data.frame(name = c("John", "Jane"), age = c(28, 24))
+```
+
+### Exercise :
+
+Create a Data Frame named MAC_df with the following data:
+
+-   A column individual_id with values from 1 to 10
+-   A column sex with a probability of males being 0.3 and females 0.7
+-   A column gametocyte density with mean of 4.87 and sd 36.7
+-   A column age with mean 19.5 and sd 16.8
+
+## Solution :
+
+```{r echo=TRUE, eval=TRUE}
+set.seed(123)  # Setting seed for reproducibility
+
+# Create the data frame
+MAC_df <- data.frame(
+  individual_id = 1:10,
+  sex = sample(c("male", "female"), 10, replace = TRUE, prob = c(0.3, 0.7)),
+  gametocyte_density = rnorm(10, mean = 4.87, sd = 36.7),
+  age = abs(rnorm(10, mean = 19.5, sd = 13.8))
+)
+
+# Print the data frame
+print(MAC_df)
+```
+
+## Control Flow
+
+### If-Else
+
+```{r echo=TRUE, eval=T}
+if (x > 10) {   print("x is greater than 10") } else {   print("x is not greater than 10") }
+```
+
+### For Loop
+
+```{r echo=TRUE, eval=T}
+for (i in 1:5) {   print(i) }
+```
+
+### While Loop
+
+```{r echo=TRUE, eval=T}
+count <- 0 
+while (count < 5) {   
+  print(count)   
+  count <- count + 1 }
+```
+
+## Functions
+
+### Defining a Function
+
+```{r echo=TRUE, eval=T}
+add <- function(x, y) {
+  sum <- x + y
+  return(sum)
+}
+
+```
+
+### Using a Function
+
+```{r echo=TRUE, eval=T}
+result <- add(10, 5) 
+print(result)  # 15
+```
+
+#### Exercise:
+
+Create a function named check_number that takes a number as an argument and prints whether the number is positive, negative, or zero.
+
+## Solution :
+
+```{r echo=TRUE, eval=T}
+check_number <- function(x) {
+  if (x > 0) {
+    cat("The number is positive.\n")
+  } else if (x < 0) {
+    cat("The number is negative.\n")
+  } else {
+    cat("The number is zero.\n")
+  }
+}
+
+```
+
+Test the function:
+
+```{r echo=TRUE, eval=T}
+check_number(10)    # Should print "The number is positive."
+check_number(-5)    # Should print "The number is negative."
+check_number(0)
+
+```
+
+## R Resources
+
+### Blogs & Websites
+
+- [R-bloggers](https://www.r-bloggers.com/): A blog aggregator that shares articles and tutorials related to R from various authors.
+- [RStudio Blog](https://blog.rstudio.com/): Official blog of RStudio, providing updates on RStudio products and events.
+- [DataCamp](https://www.datacamp.com/community/blog): Provides numerous tutorials and exercises on R programming.
+
+## Online Forums & Communities
+
+- [Stack Overflow - R](https://stackoverflow.com/questions/tagged/r): A place to ask and answer questions related to R programming.
+- [RStudio Community](https://community.rstudio.com/): A forum for RStudio users to discuss R related topics.
+
+## Books & Documentation
+
+- [R for Data Science](https://r4ds.had.co.nz/): A book by Hadley Wickham and Garrett Grolemund, providing a comprehensive introduction to R for data science.
+- [Advanced R](https://adv-r.hadley.nz/): Another book by Hadley Wickham, focusing on advanced R programming techniques.
+- [The R Manuals](https://cran.r-project.org/manuals.html): Official manuals for R, including an introduction, a reference index, and writing R extensions.
+
+## Online Learning Platforms
+
+- [Coursera - R Programming](https://www.coursera.org/courses?query=r%20programming): Offers various courses on R programming from different universities and institutions.
+- [edX - R Programming](https://www.edx.org/learn/r-programming): Provides courses on R programming and data analysis.
+
+Feel free to explore these resources to enhance your R programming skills!
+
+::: largest
+## Thank you.
+:::
